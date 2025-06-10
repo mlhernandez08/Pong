@@ -9,8 +9,11 @@ push = require 'push'
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
-    largeFont = love.graphics.newFont('Gerhaus-Regular.ttf', 32)
-    smallFont = love.graphics.newFont('Gerhaus-Regular.ttf', 8)
+    largeFont = love.graphics.newFont('PixeloidMono.ttf', 32)
+    smallFont = love.graphics.newFont('PixeloidMono.ttf', 8)
+
+    player1Score = 0
+    player2Score = 0
 
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {
         resizable = false,
@@ -28,8 +31,20 @@ end
 
 function love.draw()
     push.start()
-    love.graphics.clear(45/255, 50/255, 20/255, 1)
+    love.graphics.clear(40/255, 45/255, 52/255, 1)
     love.graphics.setFont(largeFont)
-    love.graphics.printf('Hello, Pong!', 0, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
+    love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 2 - 80)
+    love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 2 - 80)
+
+
+    -- paddle 1
+    love.graphics.rectangle('fill', 10, 10, 5, 20)
+
+    -- paddle 2
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH - 15, VIRTUAL_HEIGHT - 30, 5, 20)
+
+    -- ball
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
+
     push.finish()
 end
